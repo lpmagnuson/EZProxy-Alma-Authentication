@@ -232,7 +232,7 @@ if ($auth == 0) {
     if ($auth == 0) {
 
         require("ezticket.php");
-        $ezproxy = new EzproxyTicket("http://libproxy.csun.edu", $somekey, $user, $groups);
+        $ezproxy = new EzproxyTicket("http://libproxy.csun.edu", $secret, $user, $groups);
 
         $message = "$user : PASSED III : $today : $ip\n"; 
     }

@@ -1,5 +1,5 @@
 <?php
 //Key used in user.txt to create Ticket
-$somekey = ""
+$secret = ""
 
 ?>
