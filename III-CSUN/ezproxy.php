@@ -124,8 +124,6 @@ function auth_iii($user)
   
   global $groups;
 
-  $paturl = "http://suncat.csun.edu:4500/PATRONAPI/$user/dump"; 
-
   $page = get_api_contents($paturl); 
 
   $arrRawData = explode("\n", $page);
@@ -181,8 +179,6 @@ function auth_iii($user)
       $groups = $groups . "+Faculty";
   }
 
-/* hardcode assignment for Dean & Rueyling */
-  if (($user == "darnold") || ($user == "rtsay"))  { $groups = $groups . "+Faculty"; }
   $result = 0;
   if ($expired == 2) {
       $result = 2;
