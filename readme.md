@@ -3,6 +3,8 @@ EZProxy External Script Authentication with Alma API and LDAP
 
 This repository contains an example script for setting up External Script Authentication to query an LDAP server and the Alma User API.
 
+The intended use case is if you need to use an LDAP server for authentication (username/password) but also want to check Alma user records for user group and/or expiration.  This script assumes you want only active Alma users to be able to login to EZProxy.
+
 ## EZProxy user.txt Configuration
 
 These scripts assume your EZproxy user.txt file is configured to direct users
@@ -24,9 +26,9 @@ Clone repository onto a web server that supports PHP.  Include ezticket.php and 
 ##Configuration
 
 Copy and rename config.sample.php to config.php and fill in required values.  
-Customize HTML / CSS in ezalma.php for desired look and feel of login form.
+Customize HTML in ezalma.php for desired look and feel of login form.
 
 
 ##Deploy
 
-Set up EZProxy's user.txt file with the above configuration, replacing https://someschool.edu/ezalma.php with the location of your script.
+Set up EZProxy's user.txt file with the above configuration, replacing https://someschool.edu/ezalma.php with the location of your script.  Restart EZProxy.
