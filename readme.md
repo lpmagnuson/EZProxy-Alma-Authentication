@@ -9,13 +9,13 @@ These scripts assume your EZproxy user.txt file is configured to direct users
 attempting to authenticate to a script on another server which will use an 
 EZProxy "ticket" to authenticate the user, e.g.:
 
-::cgi=https://someschool.edu/ezalma.php?url=^U
-::Ticket
-AcceptGroups Default+Faculty
-TimeValid 10
-MD5 topsecretvalue
-Expired; Deny expired.html
-/Ticket
+::cgi=https://someschool.edu/ezalma.php?url=^U  
+::Ticket  
+AcceptGroups Default+Faculty  
+TimeValid 10  
+MD5 topsecretvalue  
+Expired; Deny expired.html  
+/Ticket  
 
 ##Installation
 
