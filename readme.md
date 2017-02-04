@@ -19,11 +19,13 @@ Expired; Deny expired.html
 
 ##Installation
 
-Clone repository onto a web server that supports PHP.
+Clone repository onto a web server that supports PHP.  Include ezticket.php and functions.php in the same directory as ezalma.php.  You don't need the sample_response.txt file, that's just there to show you what the response from the Alma API looks like.
 
 ##Configuration
 
-Copy and rename config.sample.php to config.php and fill in required values.
+Copy and rename config.sample.php to config.php and fill in required values.  
+Customize HTML / CSS in ezalma.php for desired look and feel of login form.
+
 
 ##Deploy
 
