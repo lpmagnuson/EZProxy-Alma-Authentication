@@ -27,4 +27,4 @@ Copy and rename config.sample.php to config.php and fill in required values.
 
 ##Deploy
 
-Set up EZProxy's user.txt file with the above configuration.
+Set up EZProxy's user.txt file with the above configuration, replacing https://someschool.edu/ezalma.php with the location of your script.
