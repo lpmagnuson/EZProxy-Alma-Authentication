@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
   			ShowForm();
 		} else {
 		    //All other errors;
-  			$_SESSION['errors'] = "Please see the desk for assistance.";
+  			$_SESSION['errors'] = "Please see the circulation desk for assistance.";
   			ShowForm();
 		}
 } else {
