@@ -1,2 +1,5 @@
 config.php
-*.txt
+tests/
+csun/
+*.html
+*.zip

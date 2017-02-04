@@ -83,15 +83,14 @@ echo
         echo $line;
     }
 
-}
+
 
 function auth_ldap($user, $pass, $domain)
 {
   global $uid;
+  global $ldap_server;
   if ($user ==  "") return 0;
 
-  $ldap_server = "sdir.csun.edu";
-  $base = "o=csun";
   $ds=ldap_connect($ldap_server);
   $query = "maillocaladdress=" . $user;
   if (strpos($user, "@") === false) { $query = $query . $domain ; }

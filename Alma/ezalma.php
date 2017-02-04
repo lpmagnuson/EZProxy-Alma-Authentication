@@ -1,51 +1,56 @@
 <?php
-function auth_alma($user) {
 require('config.php');
-$ch = curl_init();
-$url = 'https://api-na.hosted.exlibrisgroup.com/almaws/v1/users/{user_id}';
-$templateParamNames = array('{user_id}');
-$templateParamValues = array(urlencode($user));
-$url = str_replace($templateParamNames, $templateParamValues, $url);
-$queryParams = '?' . urlencode('user_id_type') . '=' . urlencode('all_unique') . '&' . urlencode('view') . '=' . urlencode('full') . '&' . urlencode('expand') . '=' . urlencode('none') . '&' . urlencode('apikey') . '=' . urlencode($key);
-curl_setopt($ch, CURLOPT_URL, $url . $queryParams);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-curl_setopt($ch, CURLOPT_HEADER, FALSE);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-$response = curl_exec($ch);
-curl_close($ch);
-//parse the response
-$group_auth = $status_auth = $authenticate = 1;
-$patron_type = $status = "";
-$xmlObj = simplexml_load_string($response);
-$patron_type = $xmlObj->user_group;
-$status = $xmlObj->status;
-if (in_array($patron_type, $allowable_patrons)) {
-  $group_auth = 0;
-} else {
-  $group_auth = 1;
-}
-if ($status == "ACTIVE") {
-  $status_auth = 0;
-} else {
-  $status_auth = 2;
-}
+require('functions.php');
 
-$authenticate = $group_auth + $status_auth;
-return $authenticate;
-
+function ShowForm() {
+	$desturl = "";
+	$errors = "";
+	if (isset($_REQUEST["url"])) {$desturl = $_REQUEST["url"]; }
+    	echo '<form method="post" action="ezalma.php">';
+    	echo '<input type="hidden" name="desturl" value="' . $desturl . '"/>';
+		echo '<div class="proxyform">';
+   		echo '<label for="user"><b>User ID:</b></label>';
+    	echo '<input type="text" name="user" size="25" maxlength="50" id="user" /><br />';
+    	echo '<label for="password"><b>Password:</b></label>';
+    	echo '<input type="password" name="pass" size="25" maxlength="35" id="password"/><br />';
+    	echo '<div class="buttons"><input type="submit" name="submit" value="Submit" />';
+    	echo '<input type="reset" value="Clear"/></div>';
+    	echo '</div>';
+    	echo '</form>';
+    if (isset($_SESSION['errors'])) { $errors = $_SESSION["errors"]; echo $errors;}
+    
 }
-
-if (isset($_POST["user"])) {$user = $_POST["user"]; }
-$result = auth_alma($user);
-if ($result == 0) {
-  echo "Yay!";
-  require("ezticket.php");
-  $ezproxy = new EzproxyTicket("http://libproxy.csun.edu", $secret, $user, $groups);
-} elseif ($result == 1) {
-  echo "User Group is not allowed remote access.";
-} elseif ($result == 2) {
-  echo "User is expired.";
+if (isset($_POST['submit'])) {
+	if (isset($_POST["user"])) {$user = $_POST["user"]; }
+	if (isset($_POST["pass"])) {$pass = $_POST["pass"]; }
+	if (isset($_POST["desturl"])) {$desturl = $_POST["desturl"]; }
+	$result = auth_alma($user);
+	$result = auth_ldap($user,$pass);
+		if ($result == "0") {
+  			require("ezticket.php");
+  				$ezproxy = new EzproxyTicket("http://libproxy.csun.edu", $secret, $user, $groups);
+  				$ticket = $ezproxy->url($desturl);
+        		$header = "Location:" . $ticket;
+        		header($header);
+		} elseif ($result == "1") {
+  			//Usergroup not allowed remote access;
+  			$_SESSION['errors'] = "User Group is not allowed remote access.";
+  			ShowForm();
+		} elseif ($result == "2") {
+  			//User is expired;
+  			$_SESSION['errors'] = "User is expired.";
+  			ShowForm();
+		} elseif ($result == "3") {
+		    //Username or Password incorrect;
+		    $_SESSION['errors'] = "Username or password incorect.";
+  			ShowForm();
+		} else {
+		    //All other errors;
+  			$_SESSION['errors'] = "Please see the desk for assistance.";
+  			ShowForm();
+		}
 } else {
-  echo "Please see the desk for assistance.";
+ShowForm();
+exit;
 }
 ?>
