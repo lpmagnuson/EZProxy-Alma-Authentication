@@ -59,7 +59,7 @@ function auth_ldap($username, $upasswd) {
 	$found=0;
 	$ds = ldap_connect($ldap_server, $ldap_port) or die("Could not connect to $ldaphost");
 	if ($ds) {
- 		$binddn = "uid=" .$username .",ou=people,ou=auth,o=csun"; //cn=admin or whatever you use to login by phpldapadmin
+ 		$binddn = "uid=" .$username ."," . $base; 
  		$ldapbind = @ldap_bind($ds,$binddn, $upasswd);
  
 		//check if ldap was sucessful, if fail return 3
