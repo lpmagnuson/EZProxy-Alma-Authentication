@@ -31,4 +31,4 @@ Customize HTML in ezalma.php for desired look and feel of login form.
 
 ##Deploy
 
-Set up EZProxy's user.txt file with the above configuration, replacing https://someschool.edu/ezalma.php with the location of your script.  Restart EZProxy.
+Set up EZProxy's user.txt file with the above configuration, replacing https://someschool.edu/ezalma.php with the location of your script.  Replace MD5 'topsecretvalue' with some other secret password.  Restart EZProxy.
