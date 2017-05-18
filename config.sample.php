@@ -12,7 +12,7 @@ $ldap_server = "";
 //LDAP bind port.  Usually 389.
 $ldap_port = 389;
 //LDAP Search base, e.g., ou=people,ou=Auth,o=wxyz
-//If not sure of this, use the "test LDAP" functionality of EZProxy admin
+//If not sure of this, use the "test LDAP" functionality of EZProxy admin and look up a user, and examine the DN value returned with the user record
 $base = "";
 //EZProxy URL, e.g., libproxy.school.edu
 $libproxy = "";

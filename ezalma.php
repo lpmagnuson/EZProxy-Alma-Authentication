@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 	$result = auth_ldap($user,$pass);
 		if ($result == "0") {
   			require("ezticket.php");
-  				$ezproxy = new EzproxyTicket("http://libproxy.csun.edu", $secret, $user, $groups);
+  				$ezproxy = new EzproxyTicket($libproxy, $secret, $user, $groups);
   				$ticket = $ezproxy->url($desturl);
         		$header = "Location:" . $ticket;
         		header($header);
