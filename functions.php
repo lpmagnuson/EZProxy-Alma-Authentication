@@ -57,7 +57,7 @@ function auth_alma($user) {
 function auth_ldap($username, $upasswd) {
 	require('config.php');
 	$found=0;
-	$ds = ldap_connect($ldap_server, $ldap_port) or die("Could not connect to $ldaphost");
+	$ds = ldap_connect($ldap_server,$ldap_port) or die("Could not connect to $ldaphost");
 	if ($ds) {
  		$binddn = "uid=" .$username ."," . $base; 
  		$ldapbind = @ldap_bind($ds,$binddn, $upasswd);

@@ -5,3 +5,6 @@ csun/
 *.zip
 III-CSUN/
 Alma/
+ldaps.php
+.DS_Store
+config-test.php

@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
   			ShowForm();
 		} elseif ($result == "3") {
 		    //Username or Password incorrect;
-		    $_SESSION['errors'] = "Username or password incorect.";
+		    $_SESSION['errors'] = "Username or password incorrect.";
   			ShowForm();
 		} else {
 		    //All other errors;
