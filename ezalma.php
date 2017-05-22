@@ -24,8 +24,9 @@ if (isset($_POST['submit'])) {
 	if (isset($_POST["user"])) {$user = $_POST["user"]; }
 	if (isset($_POST["pass"])) {$pass = $_POST["pass"]; }
 	if (isset($_POST["desturl"])) {$desturl = $_POST["desturl"]; }
-	$result = auth_ldap($user,$pass);
-	$result = auth_alma($user);
+	$result_ldap = auth_ldap($user,$pass);
+	$result_alma = auth_alma($user);
+	$result = $result_ldap + $result_alma;
 		if ($result == "0") {
   			require("ezticket.php");
   				$ezproxy = new EzproxyTicket($libproxy, $secret, $user, $groups);
