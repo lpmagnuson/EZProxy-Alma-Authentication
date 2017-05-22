@@ -59,8 +59,9 @@ function auth_ldap($username, $upasswd) {
 	$found=0;
 	$ds = ldap_connect($ldap_server,$ldap_port) or die("Could not connect to $ldaphost");
 	if ($ds) {
- 		$binddn = "uid=" .$username ."," . $base; 
- 		$ldapbind = @ldap_bind($ds,$binddn, $upasswd);
+		for($i=0;$i<count($base);$i++) {
+ 		$binddn = "uid=" .$username ."," . $base[$i]; 
+ 		$ldapbind = ldap_bind($ds,$binddn, $upasswd);
  
 		//check if ldap was sucessful, if fail return 3
 		if ($ldapbind) {
@@ -68,7 +69,7 @@ function auth_ldap($username, $upasswd) {
 		} else {
     		$found=3;
 		}
-		}
+		break;}}
 	return $found;
 }
 

@@ -52,7 +52,7 @@ Content-Length: 3643
     </addresses>
     <emails>
       <email preferred="true" segment_type="External">
-        <email_address>Firstname.Lastname@SCRUBBED_csun.edu</email_address>
+        <email_address>Firstname.Lastname@SCRUBBED_school.edu</email_address>
         <email_types>
           <email_type desc="Personal">personal</email_type>
           <email_type desc="Work">work</email_type>
